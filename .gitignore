@@ -27,3 +27,7 @@ Thumbs.db
 # Временные файлы
 *.tmp
 *.bak
+
+# инфа об пакете (pkgbuild)
+pkgbuild/
+PKGBUILD
