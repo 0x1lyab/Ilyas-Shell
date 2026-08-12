@@ -1,5 +1,5 @@
 
-### -- Ilya's:Shell --
+### --<( Ilya's:Shell )>--
 # Приветствую в коде оболочки! Код полностью читаемый и понятный.
 # Задумка была чтобы быть улучшенной версией ilya's:cmd_, которая работает через модули.
 # Кстати, посмотрите в configs/configShell.py там находится конфиг оболочки! 
@@ -9,13 +9,12 @@
 # ^^^ шебанг ^^^
 
 # -- Импорты --
-
 import os
 import random
 import time
 import readline
 try:
-    import config
+    import configs.configShell as config
 except ModuleNotFoundError:
     raise SystemError('Файл конфига не найден. Работа оболочки невозможна.')
 try:
