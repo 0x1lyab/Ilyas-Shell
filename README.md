@@ -84,7 +84,7 @@ chmod +x IlyasShell.py
 
 ## 📜 Лицензия
 
-### GPLv3
+### GNU General Public License 3.0
 
 ## 🙏 Благодарности
 
