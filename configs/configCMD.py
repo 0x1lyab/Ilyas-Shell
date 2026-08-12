@@ -22,5 +22,5 @@ DEAD_LIST = []
 KILL_BLACK_LIST = []
 COMMAND_NOT_FOUND = f"{col.rbd}ilya: Команда не найдена :Р{col.w}"
 
-class USER_COMMANDS: # Используется для пользовательских команд (НЕ РАБОТАЕТ)
+class USER_COMMANDS: # Используется для пользовательских команд (НЕ РАБОТАЕТ) Для пользовательских команд есть Ilya's:Shell 
     pass
