@@ -1,0 +1,29 @@
+# Python
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+*.so
+*.dll
+*.egg-info/
+dist/
+build/
+*.egg
+
+# Локальные файлы
+*.log
+.directory
+
+# Редакторы и IDE
+.vscode/
+.idea/
+*.swp
+*.swo
+
+# Системные папки
+.DS_Store
+Thumbs.db
+
+# Временные файлы
+*.tmp
+*.bak

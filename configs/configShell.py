@@ -19,7 +19,7 @@ KILL_BLACK_LIST = []
 
 # -- Пользовательские команды --
 class USER_COMMANDS:
-    enabled = True # заменить на True чтобы включить
+    enabled = False # заменить на True чтобы включить
     # -- Команды --
     def hello():
         print('hello')
@@ -28,11 +28,10 @@ class USER_COMMANDS:
         print(f"Чижик говорит: {text}")
     # -- Ссылки на команды --
     list_with_args = {
-        'chizhik_says': chizhik_says,
+        'chizhik_says': chizhik_says
     }
     list_ = {
         # пример:
         # 'слово вызова команды':ссылка на функцию
-        'hello':hello,
-        'chizhik_says':chizhik_says
+        'hello':hello
     }
