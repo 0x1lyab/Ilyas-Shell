@@ -14,7 +14,7 @@ import random
 import time
 import readline
 try:
-    import configs.configShell as config
+    import configShell as config
 except ModuleNotFoundError:
     raise SystemError('Файл конфига не найден. Работа оболочки невозможна.')
 try:

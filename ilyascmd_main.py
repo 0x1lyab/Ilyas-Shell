@@ -15,7 +15,7 @@ import random
 import readline
 
 try:
-    import configs.configCMD as config1
+    import configCMD as config1
 except ModuleNotFoundError:
     raise SystemExit('ModuleNotFoundError: Файл config1.py не найден. Работа оболочки невозможна.')
 
