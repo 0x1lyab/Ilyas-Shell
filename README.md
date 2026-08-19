@@ -55,11 +55,11 @@ chmod +x IlyasShell.py
 
 ## 🚀 Быстрый запуск
 
-- Локально:
+### Локально:
   ```bash
     ln -s ~/путь/к/Ilyas-shell/IlyasShell.py ~/.local/bin/ilyasshell
   ```
-- Для всех пользователей (нужны права sudo):
+### Для всех пользователей (нужны права sudo):
   ```bash
     sudo ln -s ~/путь/к/Ilyas-shell/IlyasShell.py /usr/bin/ilyasshell
   ```
@@ -90,61 +90,64 @@ chmod +x IlyasShell.py
   IlyasShell.revive(['я не придумал имя'])
   ```
 
-## Гайд по добавлению пользовательчких команд в конфиг
-  - В `configShell.py` найди класс `USER_COMMANDS`:
-    ```python
-    class USER_COMMANDS:
-      enabled = False
+## Гайд по добавлению пользовательcких команд в конфиг
+### В `configShell.py` найди класс `USER_COMMANDS`:
+  ```python
+  class USER_COMMANDS:
+    enabled = False
 
-      # -- Команды --
-      def chizhik_says(arg):
-          text = ' '.join(arg)
-          print(f"Чижик говорит: {text}")
+    # -- Команды --
+    def chizhik_says(arg):
+        text = ' '.join(arg)
+        print(f"Чижик говорит: {text}")
 
-      # -- Ссылки на команды --
-      list_with_args = {
-          'chizhik_says': chizhik_says
-      }; list_ = {
-          # пока здесь пусто ;(
+    # -- Ссылки на команды --
+    list_with_args = {
+        'chizhik_says': chizhik_says
+    }; list_ = {
+        # пока здесь пусто ;(
       }
-    ```
-  - Для добавления собственной команды ее надо поместить в функцию под коментарием `# -- Команды -- `
-    - Без аргументов:
-      ```python
-        def my_command():
-          print('Это моя пользовательская команда!')
-      ```
-    - С аргументами:
-    ```python
-        def my_age(arg):
-          age = ' '.target.join(arg) # Нужно для превращения списка в строку
-          # Если надо только первый аргумент
-          age = arg[0]
-          print(f'Мне {age} лет!')
-      ```
-  - Теперь надо добавить ссылку на команду
-    - Без аргументов:
-    ```python
-      list_ = {
-        #'команда для вызова':название функции для вызова
-        'my_command':my_command
-      }
-    ```
-    - С аргументами:
-      ```python
-      list_with_args = {
-        'my_age':my_age
-      }
-  - Самое важное и сложное:
-    - Заменить значение `enabled` на `True`:
-      ```python
-        enabled = True
-      ```
-    - Если надо отключить можно заменить значение на что угодно:
-      ```python
-        enabled = False
-      ```
-  - Сохрани конфиг и проверяй
+  ```
+### Для добавления собственной команды ее надо поместить в функцию под коментарием `# -- Команды -- `
+#### Без аргументов:
+```python
+    def my_command():
+      print('Это моя пользовательская команда!')
+```
+#### С аргументами:
+```python
+    def my_age(arg):
+      age = ' '.target.join(arg) # Нужно для превращения списка в строку
+      # Если надо только первый аргумент
+      age = arg[0]
+      print(f'Мне {age} лет!')
+```
+### Теперь надо добавить ссылку на команду
+#### Без аргументов:
+```python
+  list_ = {
+    #'команда для вызова':название функции для вызова
+    'my_command':my_command
+  }
+```
+#### С аргументами:
+```python
+  list_with_args = {
+    'my_age':my_age
+  }
+```
+### Самое важное и сложное:
+#### Заменить значение `enabled` на `True`:
+```python
+  enabled = True
+```
+#### Если надо отключить можно заменить значение на что угодно:
+```python
+  enabled = False
+```
+### Сохрани конфиг и проверяй
+
+### *P.S Не работает с ilya's:cmd_*
 
 ## 🐦 Чижик и Пыжуля
 
