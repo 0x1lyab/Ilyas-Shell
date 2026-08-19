@@ -15,7 +15,7 @@ class clr: # цвета такие
 
 ncalc1 = f"{clr.y}{clr.bd}calc1.py: {clr.w}"
 
-oprtlist = ['+','-','*','/','**']
+oprtlist = ['+','-','*','/','//','**']
 def calcdotpy():
     def execalc(a, oprt, b):
         if oprt == '*':
@@ -28,8 +28,10 @@ def calcdotpy():
             return a - b
         elif oprt == '**':
             return a ** b
+        elif oprt == '//':
+            return a // b
         else:
-            print(f'{ncalc1}Операция не найдена, доступные операции: +, -, /, *, **. Для вычесления корня: [число] ** 0,5')
+            print(f'{ncalc1}Операция не найдена, доступные операции: +, -, /, //, *, **. Для вычисления корня: [число] ** 0,5')
 
 
     while True:

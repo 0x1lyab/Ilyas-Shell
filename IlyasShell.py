@@ -36,8 +36,7 @@ history_file = './.history_file'
 try:
     readline.read_history_file(history_file)
 except FileNotFoundError:
-    with open('.history_file', 'w') as f:
-        pass
+    open('.history_file', 'w')
     readline.read_history_file('./.history_file')
 
 INTERACTIVE = False
@@ -57,7 +56,7 @@ def shelp(): # к сожалению help() нельзя использоват�
             'calc/calculator                    - запуск скрипта calc1.py (через вызов функции, напрямую невозможно)\n',
             'rng/random/randomizer <min> <max>  - вывести рандомное число в заданом диапазоне\n',
             'pif/pifagor                        - запуск скрипта pifagor.py (через вызов функции, напрямую невозможно)\n',
-            'guess                              - игра в угадай число, правила будут озвучены при вызове (для вызова напишите команду guess)\n',
+            'guess                              - игра в угадай число\n',
             'echo <текст>                       - вывести текст'
         )
     elif INTERACTIVE == False:
