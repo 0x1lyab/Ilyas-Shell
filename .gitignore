@@ -9,11 +9,12 @@ __pycache__/
 dist/
 build/
 *.egg
-.history_file
 
 # Локальные файлы
 *.log
 .directory
+.history_file
+.gitignore
 
 # Редакторы и IDE
 .vscode/
