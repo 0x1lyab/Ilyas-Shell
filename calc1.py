@@ -1,5 +1,6 @@
 
-# аддон к ilyascmd_main.py
+# аддон к ilyascmd_main.py 
+# и к IlyasShell.py!
 
 # calc1.py
 class clr: # цвета такие
@@ -33,7 +34,6 @@ def calcdotpy():
         else:
             print(f'{ncalc1}Операция не найдена, доступные операции: +, -, /, //, *, **. Для вычисления корня: [число] ** 0,5')
 
-
     while True:
         try:
             problem = input(f'{clr.y}{clr.bd}calc1.py > {clr.w}').split()
@@ -46,7 +46,7 @@ def calcdotpy():
                 except ValueError:
                     print(f"{ncalc1}Неправильное значение чисел или операции.")
                 except ZeroDivisionError:
-                    print(f"{ncalc1} Ответ: дибил на ноль делить незя")
+                    print(f"{ncalc1}Ответ: дибил на ноль делить незя")
             else: 
                 print(f'{ncalc1}Неверная операция.')
         except ValueError:
