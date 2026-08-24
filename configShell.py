@@ -22,8 +22,6 @@ class USER_COMMANDS:
     enabled = False
 
     # -- Команды --
-    def hello():
-        print('hello')
     def chizhik_says(arg):
         text = ' '.join(arg)
         print(f"Чижик говорит: {text}")
