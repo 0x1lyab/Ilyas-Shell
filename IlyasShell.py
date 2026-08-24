@@ -1,17 +1,22 @@
 #!/usr/bin/env python3
 # ^^^ шебанг ^^^
 
-### --<( Ilya's:Shell )>--
+### ---------------------- ###
+### --<( Ilya's:Shell )>-- ###
+### ---------------------- ###
+
 # Приветствую в коде оболочки! Код полностью читаемый и понятный.
 # Задумка была чтобы быть улучшенной версией ilya's:cmd_, которая работает через модули.
-# Кстати, посмотрите в configShell.py там находится конфиг оболочки! 
-# Пожалуйста, не удаляйте его. Без него оболочка не будет работать
+# Кстати, посмотри configShell.py там находится конфиг оболочки! 
+# Пожалуйста, не удаляй его. Без него оболочка не будет работать
 
-# -- Импорты --
+### -- Импорты --
 import os
 import random
 import time
 import readline
+import traceback
+import sys
 try:
     import configShell as config
 except ModuleNotFoundError:
@@ -22,7 +27,7 @@ try:
 except ModuleNotFoundError:
     pass
 
-# -- Переменные --
+### -- Переменные --
 col = config.col
 USER = os.getlogin()
 prompt = config.PROMPT
@@ -30,7 +35,7 @@ dead_list = config.DEAD_LIST
 ilya = f'{col.g}{col.bd}Илья:{col.rs}'
 dont_dare = config.KILL_BLACK_LIST
 dont_dare.extend([
-    'чижик', 'chizhik', 'илья', 'ilya', "пыжуля", "чыжык", USER
+    'чижик', 'chizhik', 'илья', 'ilya', "пыжуля", 'pyzhulya' "чыжык", USER
 ])
 history_file = './.history_file'
 try:
@@ -41,7 +46,7 @@ except FileNotFoundError:
 
 INTERACTIVE = False
 
-# -- Команды --
+### -- Команды --
 def shelp(): # к сожалению help() нельзя использовать, он зарезервирован
     if INTERACTIVE == True:
         print(f"{ilya} Вот тебе список:\n",
@@ -76,12 +81,15 @@ def shelp(): # к сожалению help() нельзя использоват�
 
 class KillAttemptError(Exception):
     pass
-def kill(target):
-    target = ' '.join(target)
+def kill(target='Null'):
+    if target == 'Null':
+        target = input(f'{ilya} Кого хочешь {col.rbd}убить? {col.rs}{col.y}')
+    else:
+        target = ' '.join(target)
     target_ls = target.lower().strip()
     global dead_list
     if any(bad_name in target_ls for bad_name in dont_dare):
-        raise KillAttemptError(f"{col.rbd}{random.choice([ #! передаю привет дипсику
+        raise KillAttemptError(f"{col.rbd}{random.choice([
             'don\'t dare',
             'не смей',
             'Молодец! Ты сломал оболочку!!!',
@@ -92,10 +100,10 @@ def kill(target):
             'зачем меня убивать?',
             'проверь шкаф',
             'бибизяка! 🐦 (это моя оболочка, я имею право писать всё что угодно)'
-        ])}{col.w}")
+        ])}{col.w}") #! передаю привет дипсику
     elif target not in dead_list:
         confirm = input(f'{ilya}Ты уверен? [y/N] ').lower().strip()
-        if confirm in ['y','д']:
+        if confirm in ['y' 'yes' 'д' 'да']:
             dead_list.append(target)
             print(f'{ilya}{target} УБИТ!')
         else:
@@ -211,11 +219,11 @@ def binary_code(arg):
             while num > 0:
                 ostatok = num % 2
                 if ostatok == 1:
-                    bin_num.append(str(1))
+                    bin_num.insert(str(1), 1)
                 else:
-                    bin_num.append(str(0))
+                    bin_num.insert(str(0), 1)
                 num //= 2
-            print(f'{ilya} Результат: {''.join(reversed(bin_num))}')
+            print(f'{ilya} Результат: {''.join(bin_num)}')
         elif flag == '-d':
             print(f'{ilya} Результат: {int(binstr, 2)}')
     except ValueError:
@@ -223,7 +231,7 @@ def binary_code(arg):
     except IndexError:
         print(f'{ilya} error')
 
-# -- Словарик команд --
+### -- Словарик команд --
 COMMANDSWARGS = {
     'kill':kill,
     'revive':revive,
@@ -252,14 +260,13 @@ COMMANDS = {
 def StartShell():
     global INTERACTIVE
     INTERACTIVE = True
-    print( # приветствие при запуске StartShell()
-        f'{col.bd}Добро пожаловать в оболочку {col.g}{col.bd}💚 Ilya\'s{col.c}:Shell 🐚,{col.w}\n',
-        f'улучшенную версию {col.g}{col.bd}ilya\'s{col.v}:{col.c}cmd_{col.w} написаную на {col.y}Python 3.1!{col.rs}'
-    )
+    # приветствие при запуске StartShell()
+    print(f'{col.bd}Добро пожаловать в оболочку {col.g}{col.bd}💚 Ilya\'s{col.c}:Shell 🐚,{col.w}')
+    print(f'улучшенную версию {col.g}{col.bd}ilya\'s{col.v}:{col.c}cmd_{col.w} написаную на {col.y}Python 3.1!{col.rs}')
     if config.USER_COMMANDS.enabled == True:
         COMMANDS.update(config.USER_COMMANDS.list_ )
         COMMANDSWARGS.update(config.USER_COMMANDS.list_with_args)
-        print(f'{col.bd}{col.g}Включенны пользовательские команды.')
+        print(f'{col.bd}{col.g}Включенны пользовательские команды.{col.rs}')
     while True:
         try:
             inp = input(f'{prompt} > ').split()
@@ -278,21 +285,27 @@ def StartShell():
         except IndexError:
             continue
         readline.write_history_file(history_file)
-        if cmd in COMMANDSWARGS:
-            if arg:
+        try:
+            if cmd in COMMANDSWARGS:    
                 COMMANDSWARGS[cmd](arg)
+            elif cmd in COMMANDS:
+                COMMANDS[cmd]()
+            elif cmd == 'exit':
+                INTERACTIVE = False
+                # raise SystemExit(f'{col.rbd}Илья: ЗА ЧТО ?!??!?!?!??!?!??!?787:?%?*(?№"*(?(;"291Н87УНЦ378АНУК7П')
+                print(f'{col.rbd}Илья: ЗА ЧТО ?!??!?!?!??!?!??!?787:?%?*(?№"*(?(;"291Н87УНЦ378АНУК7П')
+                break
             else:
-                print(f'{col.rbd}Илья: Команда {cmd} требует аргумент!{col.rs}')
-        elif cmd in COMMANDS:
-            COMMANDS[cmd]()
-        elif cmd == 'exit':
-            INTERACTIVE = False
-            # raise SystemExit(f'{col.rbd}Илья: ЗА ЧТО ?!??!?!?!??!?!??!?787:?%?*(?№"*(?(;"291Н87УНЦ378АНУК7П')
-            print(f'{col.rbd}Илья: ЗА ЧТО ?!??!?!?!??!?!??!?787:?%?*(?№"*(?(;"291Н87УНЦ378АНУК7П')
-            break
-        else:
-            print(config.COMMAND_NOT_FOUND)
-
+                print(config.COMMAND_NOT_FOUND)
+        except Exception as e:
+            EType = type(e).__name__
+            print(f'{col.y}{col.bd}{random.choice([
+                f'Опа! Ошибка...',
+                f'Чё? Опять?',
+                f'Ломай! Ломай! Мы же миллионеры!',
+                f'о нет ошыбка'
+            ])}{col.rs}')
+            print(f'{col.bd}{col.v if EType != "KillAttemptError" else col.r}{EType}{col.rs}: {e}{col.rs}')
 # -- Запуск --
 if __name__ == '__main__': # Если файл запущен напрямую, то запускается StartShell() и оболочка начинает работать
     StartShell()
