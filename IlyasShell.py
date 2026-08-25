@@ -82,7 +82,7 @@ def shelp(): # к сожалению help() нельзя использоват�
 class KillAttemptError(Exception):
     pass
 def kill(target='Null'):
-    if target == 'Null':
+    if target == 'Null' or not target:
         target = input(f'{ilya} Кого хочешь {col.rbd}убить? {col.rs}{col.y}')
     else:
         target = ' '.join(target)
@@ -101,9 +101,9 @@ def kill(target='Null'):
             'проверь шкаф',
             'бибизяка! 🐦 (это моя оболочка, я имею право писать всё что угодно)'
         ])}{col.w}") #! передаю привет дипсику
-    elif target not in dead_list:
+    elif target_ls not in dead_list:
         confirm = input(f'{ilya}Ты уверен? [y/N] ').lower().strip()
-        if confirm in ['y' 'yes' 'д' 'да']:
+        if confirm in ['y', 'yes', 'д', 'да']:
             dead_list.append(target)
             print(f'{ilya}{target} УБИТ!')
         else:
@@ -111,9 +111,12 @@ def kill(target='Null'):
     else:
         print(f'{ilya} как я смогу убить мёртвого?')
 
-def revive(target):
+def revive(target='Null'):
     global dead_list
-    target = ' '.join(target)
+    if target == 'Null' or not target:
+        target = input(f'{col.rbd}???: {col.y}target to revive: {col.bd}')
+    else:
+        target = ' '.join(target)
     print('...')
     time.sleep(4)
     if target.lower().strip() in dead_list:
@@ -253,7 +256,7 @@ COMMANDS = {
     'pif':pifagor.pifagorpy,
     'pifagor':pifagor.pifagorpy,
     'guess':guess,
-    'dead_list':dead_list
+    'dead_list':fdead_list
 }
 
 #  -- Основной цикл --
@@ -290,7 +293,7 @@ def StartShell():
                 COMMANDSWARGS[cmd](arg)
             elif cmd in COMMANDS:
                 COMMANDS[cmd]()
-            elif cmd == 'exit':
+            elif cmd in ['exit', 'break', 'quit']:
                 INTERACTIVE = False
                 # raise SystemExit(f'{col.rbd}Илья: ЗА ЧТО ?!??!?!?!??!?!??!?787:?%?*(?№"*(?(;"291Н87УНЦ378АНУК7П')
                 print(f'{col.rbd}Илья: ЗА ЧТО ?!??!?!?!??!?!??!?787:?%?*(?№"*(?(;"291Н87УНЦ378АНУК7П')
