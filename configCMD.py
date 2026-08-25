@@ -17,7 +17,6 @@ class rng: # используется в команде rng
     list = [' Твое рандомное число: ', ' о нет казено > ', ' тебе выпало: ', ' Your RNG number: ', ' лох :)))) ']
 
 PROMPT = f"{col.g}{col.bd}ilya's{col.v}:{col.c}cmd_{col.w}"
-HISTORY_FILE = './.history_file'
 DEAD_LIST = []
 KILL_BLACK_LIST = []
 COMMAND_NOT_FOUND = f"{col.rbd}ilya: Команда не найдена :Р{col.w}"

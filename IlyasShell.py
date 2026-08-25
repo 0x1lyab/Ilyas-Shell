@@ -28,6 +28,7 @@ except ModuleNotFoundError:
     pass
 
 ### -- Переменные --
+__version__ = 'v1.0'
 col = configShell.col
 USER = os.getlogin()
 prompt = configShell.PROMPT
@@ -35,11 +36,11 @@ dead_list = configShell.DEAD_LIST
 ilya = f'{col.g}{col.bd}Илья:{col.rs}'
 dont_dare = configShell.KILL_BLACK_LIST
 dont_dare.extend(['чижик', 'chizhik', 'илья', 'ilya', "пыжуля", 'pyzhulya' "чыжык", USER])
-history_file = configShell.HISTORY_FILE
+history_file = os.path.expanduser('~/history_file')
 try:
     readline.read_history_file(history_file)
 except FileNotFoundError:
-    open('.history_file', 'w')
+    open(history_file, 'w').close()
     readline.read_history_file(history_file)
 
 INTERACTIVE = False
@@ -54,8 +55,6 @@ def shelp(): # к сожалению help() нельзя использоват�
             'help                               - показать это меню\n',
             'whoami                             - показать юзернейм\n'
             'exit/quit/break                    - выйти из оболочки ;(\n',
-            # 'clear                            - очистить консоль\n',
-            # 'version                          - версия оболочки\n',
             'calc/calculator                    - запуск скрипта calc1.py (через вызов функции, напрямую невозможно)\n',
             'rng/random/randomizer <min> <max>  - вывести рандомное число в заданом диапазоне\n',
             'pif/pifagor                        - запуск скрипта pifagor.py (через вызов функции, напрямую невозможно)\n',
@@ -220,11 +219,11 @@ def binary_code(arg):
             while num > 0:
                 ostatok = num % 2
                 if ostatok == 1:
-                    bin_num.insert(str(1), 1)
+                    bin_num.append(str(1))
                 else:
-                    bin_num.insert(str(0), 1)
+                    bin_num.append(str(0))
                 num //= 2
-            print(f'{ilya} Результат: {''.join(bin_num)}')
+            print(f'{ilya} Результат: {''.join(reversed(bin_num))}')
         elif flag == '-d':
             print(f'{ilya} Результат: {int(binstr, 2)}')
     except ValueError:
@@ -233,11 +232,12 @@ def binary_code(arg):
         print(f'{ilya} error')
 def sudo(arg='Null'):
     if arg == 'Null' or not arg:
-        sudoin = input(f'{prompt} {col.rbd}[sudo] {col.rs} > {col.c}')
+        sudoin = input(f'{prompt} {col.rbd}[sudo]{col.rs} > {col.c}')
     else:
         sudoin = ' '.join(arg)
-    sudo_confirm = input(f'{ilya} Перед тем как ты продолжишь')
-    os.system(f'sudo {sudoin}')
+    sudo_confirm = input(f'{ilya} Перед тем как ты продолжишь:\nКоманда sudo - это буквально получение {col.bd}всех{col.rs} прав над компьютером, одна неверная команда может {col.rbd}удалить или сломать систему.{col.rs}\nПродолжая ты принимаешь всю ответственность за принесённый ущерб системе и/или другим пользователям на себя.\nСоветую подумать дважды, ведь в ином случаи без сохранения ты не вернешь того что потерял.\nЭто первое и последнее предупреждение. [Yes|>No<] ')
+    if sudo_confirm == 'Yes':
+        os.system(f'sudo {sudoin}')
 ### -- Словарики команд --
 COMMANDSWARGS = {
     'kill':kill,
@@ -248,7 +248,8 @@ COMMANDSWARGS = {
     'rng':rng,
     'random':rng,
     'randomizer':rng,
-    'binary':binary_code
+    'binary':binary_code,
+    'sudo':sudo
 }
 COMMANDS = {
     'help':shelp,
