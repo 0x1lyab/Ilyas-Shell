@@ -18,7 +18,7 @@ import readline
 import traceback
 import sys
 try:
-    import configShell as config
+    import configShell
 except ModuleNotFoundError:
     raise SystemError('Файл конфига не найден. Работа оболочки невозможна.')
 try:
@@ -28,21 +28,19 @@ except ModuleNotFoundError:
     pass
 
 ### -- Переменные --
-col = config.col
+col = configShell.col
 USER = os.getlogin()
-prompt = config.PROMPT
-dead_list = config.DEAD_LIST
+prompt = configShell.PROMPT
+dead_list = configShell.DEAD_LIST
 ilya = f'{col.g}{col.bd}Илья:{col.rs}'
-dont_dare = config.KILL_BLACK_LIST
-dont_dare.extend([
-    'чижик', 'chizhik', 'илья', 'ilya', "пыжуля", 'pyzhulya' "чыжык", USER
-])
-history_file = './.history_file'
+dont_dare = configShell.KILL_BLACK_LIST
+dont_dare.extend(['чижик', 'chizhik', 'илья', 'ilya', "пыжуля", 'pyzhulya' "чыжык", USER])
+history_file = configShell.HISTORY_FILE
 try:
     readline.read_history_file(history_file)
 except FileNotFoundError:
     open('.history_file', 'w')
-    readline.read_history_file('./.history_file')
+    readline.read_history_file(history_file)
 
 INTERACTIVE = False
 
@@ -233,7 +231,13 @@ def binary_code(arg):
         print(f'{ilya} error')
     except IndexError:
         print(f'{ilya} error')
-
+def sudo(arg='Null'):
+    if arg == 'Null' or not arg:
+        sudoin = input(f'{prompt} {col.rbd}[sudo] {col.rs} > {col.c}')
+    else:
+        sudoin = ' '.join(arg)
+    sudo_confirm = input(f'{ilya} Перед тем как ты продолжишь')
+    os.system(f'sudo {sudoin}')
 ### -- Словарики команд --
 COMMANDSWARGS = {
     'kill':kill,
@@ -266,9 +270,9 @@ def StartShell():
     # приветствие при запуске StartShell()
     print(f'{col.bd}Добро пожаловать в оболочку {col.g}{col.bd}💚 Ilya\'s{col.c}:Shell 🐚,{col.w}')
     print(f'улучшенную версию {col.g}{col.bd}ilya\'s{col.v}:{col.c}cmd_{col.w} написаную на {col.y}Python 3.1!{col.rs}')
-    if config.USER_COMMANDS.enabled == True:
-        COMMANDS.update(config.USER_COMMANDS.list_ )
-        COMMANDSWARGS.update(config.USER_COMMANDS.list_with_args)
+    if configShell.USER_COMMANDS.enabled == True:
+        COMMANDS.update(configShell.USER_COMMANDS.list_ )
+        COMMANDSWARGS.update(configShell.USER_COMMANDS.list_with_args)
         print(f'{col.bd}{col.g}Включенны пользовательские команды.{col.rs}')
     while True:
         try:
@@ -299,7 +303,7 @@ def StartShell():
                 print(f'{col.rbd}Илья: ЗА ЧТО ?!??!?!?!??!?!??!?787:?%?*(?№"*(?(;"291Н87УНЦ378АНУК7П')
                 break
             else:
-                print(config.COMMAND_NOT_FOUND)
+                print(configShell.COMMAND_NOT_FOUND)
         except Exception as e:
             EType = type(e).__name__
             print(f'{col.y}{col.bd}{random.choice([

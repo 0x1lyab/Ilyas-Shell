@@ -15,20 +15,20 @@ import random
 import readline
 
 try:
-    import configCMD as config1
+    import configCMD
 except ModuleNotFoundError:
-    raise SystemExit('ModuleNotFoundError: Файл config1.py не найден. Работа оболочки невозможна.')
+    raise SystemExit('ModuleNotFoundError: Файл configCMD.py не найден. Работа оболочки невозможна.')
 
 class IlyaDoesNotExistError(Exception):
     pass
 
-dont_dare = config1.KILL_BLACK_LIST
-dead_list = config1.DEAD_LIST
+dont_dare = configCMD.KILL_BLACK_LIST
+dead_list = configCMD.DEAD_LIST
 WHY = 'You shouldn\'t do that. Return him.'
 if 'ilya' in dead_list:
     raise IlyaDoesNotExistError(WHY) # YOU DO THAT?
 
-HISTORY_FILE = config1.HISTORY_FILE
+HISTORY_FILE = configCMD.HISTORY_FILE
 
 try:
     readline.read_history_file(HISTORY_FILE)
@@ -36,8 +36,8 @@ except FileNotFoundError:
     open(HISTORY_FILE, 'w').close()
     readline.read_history_file(HISTORY_FILE)
 
-col = config1.col
-rng = config1.rng
+col = configCMD.col
+rng = configCMD.rng
 
 # используется для определения имя компьютера, не путать с юзернеймом(он чуть пониже)
 HOSTNAME = os.uname().nodename
@@ -51,7 +51,7 @@ ilya = f"{col.g}{col.bd}ilya:{col.w}"
 
 ilyascmd = f"{col.g}{col.bd}ilya's{col.v}:{col.c}cmd_{col.w}"
 
-prompt = config1.PROMPT
+prompt = configCMD.PROMPT
 
 # приветствие
 print(
@@ -151,7 +151,7 @@ def revive(target):
 # основной цикл
 while True:
     try:
-        strout = input(f"{prompt}> ") # {prompt}> <команда> (промпт изменять в файле config1.py)
+        strout = input(f"{prompt}> ") # {prompt}> <команда> (промпт изменять в файле configCMD.py)
         parts = strout.split()
         cmd = parts[0]
         arg = parts[1:]
@@ -291,4 +291,4 @@ while True:
             except EOFError:
                 print(f'{ilya} почему?? ;(')
     else:
-        print(config1.COMMAND_NOT_FOUND)
+        print(configCMD.COMMAND_NOT_FOUND)
