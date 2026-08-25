@@ -179,6 +179,8 @@ chmod +x IlyasShell.py
 
 - Дипсик (за объяснения)
 
+- Claude
+
 - Arch Linux
 
 ## 🔗 Ссылки
