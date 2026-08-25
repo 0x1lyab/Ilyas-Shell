@@ -231,7 +231,7 @@ def binary_code(arg):
     except IndexError:
         print(f'{ilya} error')
 
-### -- Словарик команд --
+### -- Словарики команд --
 COMMANDSWARGS = {
     'kill':kill,
     'revive':revive,
