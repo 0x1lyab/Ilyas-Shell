@@ -13,7 +13,8 @@
 - **Команды**:  
   - `kill` — убить кого-нибудь.  
   - `revive` — воскресить с драматической задержкой.  
-  - `whoami` — узнать юзернейм.  
+  - `whoami` — узнать юзернейм.
+  - `version` - версия оболочки  
   - `guess` — игра в "угадай число".  
   - `rng`,`random`,`randomizer` — генератор случайных чисел.  
   - `binary` — конвертер в двоичную систему и наоборот.  
@@ -36,17 +37,29 @@
 ---
 
 ## 📦 Установка
-
-### 1. Клонируй репозиторий
+### Arch
+- Перейди в [последний релиз](https://github.com/IMAMCHA1N1K/Ilyas-Shell/releases/latest).
+- Установи пакет .tar.zst
+- Установи
+```bash
+sudo pacman -U ~/Путь/До/ilyasshell-1.1.1-1-any.pkg.tar.zst 
+```
+- Пользуйся:
+```bash
+ilyasshell # для Ilya's:Shell
+ilyascmd # для ilya's:cmd_
+```
+### Другие дистрибутивы / ОС
+#### 1. Клонируй репозиторий
 ```bash
 git clone https://github.com/IMAMCHA1N1K/Ilyas-Shell.git
 cd Ilyas-Shell
 ```
-### 2. Запусти оболочку
+#### 2. Запусти оболочку
 ```bash
 python IlyasShell.py
 ```
-Или с правами на выполнение:
+#### Или с правами на выполнение:
 ```bash
 chmod +x IlyasShell.py
 ./IlyasShell.py
