@@ -28,7 +28,7 @@ except ModuleNotFoundError:
     pass
 
 ### -- Переменные --
-__version__ = 'v1.0'
+__version__ = 'v1.1'
 col = configShell.col
 USER = os.getlogin()
 prompt = configShell.PROMPT
@@ -53,7 +53,8 @@ def shelp(): # к сожалению help() нельзя использоват�
             'revive <цель>                      - возродить кого-нибудь, возрождать живого тоже нельзя\n',
             'dead_list                          - список мёртвых\n',
             'help                               - показать это меню\n',
-            'whoami                             - показать юзернейм\n'
+            'whoami                             - показать юзернейм\n',
+            'version                            - показать версию оболочки'
             'exit/quit/break                    - выйти из оболочки ;(\n',
             'calc/calculator                    - запуск скрипта calc1.py (через вызов функции, напрямую невозможно)\n',
             'rng/random/randomizer <min> <max>  - вывести рандомное число в заданом диапазоне\n',
@@ -140,7 +141,8 @@ def revive(target='Null'):
     else:
         print(f"{col.rbd}???: {col.y}{target} is already alive.{col.rs}")
         time.sleep(2)
-
+def version():
+    print(f'{col.g}{col.bd}💚 Ilya\'s{col.c}:Shell{col.y} Версия оболочки: {__version__}')
 def whoami():
     # омг посхалко
     if USER == f'ilya':
