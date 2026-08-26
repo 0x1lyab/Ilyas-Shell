@@ -28,7 +28,7 @@ WHY = 'You shouldn\'t do that. Return him.'
 if 'ilya' in dead_list:
     raise IlyaDoesNotExistError(WHY) # YOU DO THAT?
 
-HISTORY_FILE = configCMD.HISTORY_FILE
+HISTORY_FILE = os.path.expanduser('~/.history_file')
 
 try:
     readline.read_history_file(HISTORY_FILE)

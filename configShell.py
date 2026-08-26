@@ -15,7 +15,6 @@ PROMPT = f'{col.g}{col.bd}Ilya\'s{col.c}:Shell{col.rs}'
 DEAD_LIST = []
 COMMAND_NOT_FOUND = f'{col.rbd}Илья: Команда не найдена!{col.rs}'
 KILL_BLACK_LIST = []
-HISTORY_FILE = '~/.history_file'
 
 # -- Пользовательские команды --
 class USER_COMMANDS:
