@@ -14,7 +14,7 @@ build/
 *.log
 .directory
 .history_file
-
+venv
 
 # Редакторы и IDE
 .vscode/

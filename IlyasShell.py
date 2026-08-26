@@ -36,7 +36,7 @@ dead_list = configShell.DEAD_LIST
 ilya = f'{col.g}{col.bd}Илья:{col.rs}'
 dont_dare = configShell.KILL_BLACK_LIST
 dont_dare.extend(['чижик', 'chizhik', 'илья', 'ilya', "пыжуля", 'pyzhulya' "чыжык", USER])
-history_file = os.path.expanduser('~/history_file')
+history_file = os.path.expanduser('~/.history_file')
 try:
     readline.read_history_file(history_file)
 except FileNotFoundError:
