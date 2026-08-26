@@ -28,7 +28,7 @@ except ModuleNotFoundError:
     pass
 
 ### -- Переменные --
-__version__ = 'v1.1'
+__version__ = 'v1.1.1'
 col = configShell.col
 USER = os.getlogin()
 prompt = configShell.PROMPT
