@@ -1,14 +1,14 @@
 #!/usr/bin/env python3
 # ^^^ шебанг ^^^
 
-### ---------------------- ###
-### --<( Ilya's:Shell )>-- ###
-### ---------------------- ###
+                ### ---------------------- ###  
+                ### --<( Ilya's:Shell )>-- ### 
+                ### ---------------------- ###
 
-# Приветствую в коде оболочки! Код полностью читаемый и понятный.
-# Задумка была чтобы быть улучшенной версией ilya's:cmd_, которая работает через модули.
-# Кстати, посмотри configShell.py там находится конфиг оболочки! 
-# Пожалуйста, не удаляй его. Без него оболочка не будет работать
+#   Приветствую в коде оболочки! Код полностью читаемый и понятный.
+#   Задумка была чтобы быть улучшенной версией ilya's:cmd_, которая работает через модули.
+#   Кстати, посмотри configShell.py там находится конфиг оболочки! 
+#   Пожалуйста, не удаляй его. Без него оболочка не будет работать
 
 ### -- Импорты --
 import os
@@ -30,10 +30,13 @@ except ModuleNotFoundError:
 ### -- Переменные --
 __version__ = 'v1.1.1'
 col = configShell.col
+bg = configShell.bg
+stl = configShel.stl
+rs = configShell.rs
 USER = os.getlogin()
 prompt = configShell.PROMPT
 dead_list = configShell.DEAD_LIST
-ilya = f'{col.g}{col.bd}Илья:{col.rs}'
+ilya = f'{col.g}{stl.bd}Илья:{rs.all}'
 dont_dare = configShell.KILL_BLACK_LIST
 dont_dare.extend(['чижик', 'chizhik', 'илья', 'ilya', "пыжуля", 'pyzhulya' "чыжык", USER])
 history_file = os.path.expanduser('~/.history_file')
@@ -61,11 +64,11 @@ def shelp(): # к сожалению help() нельзя использоват�
             'pif/pifagor                        - запуск скрипта pifagor.py (через вызов функции, напрямую невозможно)\n',
             'guess                              - игра в угадай число\n',
             'echo <текст>                       - вывести текст\n',
-           f'sudo <команда>                     - запускает команды от админа {col.rbd}(ОПАСНО!){col.rs}'
+           f'sudo <команда>                     - запускает команды от админа {col.r}{stl.bd}(ОПАСНО!){rs.all}'
         )
     elif INTERACTIVE == False:
         print(f"{ilya} Вот тебе список:\n",
-            f"{col.bd}StartShell()              - запустить оболочку в интерактивном режиме{col.rs}\n",
+            f"{stl.bd}StartShell()              - запустить оболочку в интерактивном режиме{rs.all}\n",
             "kill(['<цель>'])           - убить кого-нибудь, убивать мертвого нельзя\n",
             "revive(['<цель>'])         - возродить кого-нибудь, возрождать живого тоже нельзя\n",
             "fdead_list()               - список мёртвых\n",
@@ -82,13 +85,13 @@ class KillAttemptError(Exception):
     pass
 def kill(target='Null'):
     if target == 'Null' or not target:
-        target = input(f'{ilya} Кого хочешь {col.rbd}убить? {col.rs}{col.y}')
+        target = input(f'{ilya} Кого хочешь {col.r}{stl.bd}убить? {rs.all}{col.y}')
     else:
         target = ' '.join(target)
     target_ls = target.lower().strip()
     global dead_list
     if any(bad_name in target_ls for bad_name in dont_dare):
-        raise KillAttemptError(f"{col.rbd}{random.choice([
+        raise KillAttemptError(f"{col.r}{stl.bd}{random.choice([
             'don\'t dare',
             'не смей',
             'Молодец! Ты сломал оболочку!!!',
@@ -106,43 +109,43 @@ def kill(target='Null'):
             dead_list.append(target)
             print(f'{ilya}{target} УБИТ!')
         else:
-            print(f'{ilya}{col.v}{target} остаётся в живых!{col.rs}')
+            print(f'{ilya}{col.v}{target} остаётся в живых!{rs.all}')
     else:
         print(f'{ilya} как я смогу убить мёртвого?')
 
 def revive(target='Null'):
     global dead_list
     if target == 'Null' or not target:
-        target = input(f'{col.rbd}???: {col.y}target to revive: {col.bd}')
+        target = input(f'{col.r}{stl.bd}???: {col.y}target to revive: {stl.bd}')
     else:
         target = ' '.join(target)
     print('...')
     time.sleep(4)
     if target.lower().strip() in dead_list:
         dead_list.remove(target.lower().strip())
-        print(f"{ilya} Кто это?{col.rs}")
+        print(f"{ilya} Кто это?{rs.all}")
         time.sleep(3)
-        print(f"{USER}: Где?{col.rs}")
+        print(f"{USER}: Где?{rs.all}")
         time.sleep(2)
-        print(f"{ilya} Там! Наверху!!{col.rs}")
+        print(f"{ilya} Там! Наверху!!{rs.all}")
         time.sleep(2)
         print('...')
         time.sleep(3)
-        print(f"{col.rbd}???: {col.rs}{col.y}It is {target}...{col.rs}")
+        print(f"{col.r}{stl.bd}???: {rs.stl}{col.y}It is {target}...{rs.all}")
         time.sleep(3)
-        print(f"{col.y}{col.bd}{target}: {col.rs}{col.y}Я..{col.rs}")
+        print(f"{col.y}{stl.bd}{target}: {rs.stl}{col.y}Я..{rs.all}")
         time.sleep(1)
-        print(f"{col.y}{col.bd}{target}: {col.rs}{col.y}Я снова в живых??{col.rs}")
+        print(f"{col.y}{stl.bd}{target}: {rs.stl}{col.y}Я снова в живых??{rs.all}")
         time.sleep(3)
-        print(f"{col.y}{col.bd}{target}: {col.rs}{col.y}Спасибо, тебе {USER}.{col.rs}")
+        print(f"{col.y}{stl.bd}{target}: {rs.stl}{col.y}Спасибо, тебе {USER}.{rs.all}")
         time.sleep(2)
-        print(f"{col.y}{col.bd}{target}: {col.rs}{col.y}Ты спас меня..{col.rs}")
+        print(f"{col.y}{stl.bd}{target}: {rs.stl}{col.y}Ты спас меня..{rs.all}")
         time.sleep(5)
     else:
-        print(f"{col.rbd}???: {col.y}{target} is already alive.{col.rs}")
+        print(f"{col.r}{stl.bd}???: {col.y}{target} is already alive.{rs.all}")
         time.sleep(2)
 def version():
-    print(f'{col.g}{col.bd}💚 Ilya\'s{col.c}:Shell{col.y} Версия оболочки: {__version__}')
+    print(f'{col.g}{stl.bd}💚 Ilya\'s{col.c}:Shell{col.y} Версия оболочки: {__version__}')
 def whoami():
     # омг посхалко
     if USER == f'ilya':
@@ -150,19 +153,19 @@ def whoami():
         time.sleep(2)
         print(f"{ilya} Стоп чё?. {col.w}")
         time.sleep(1)
-        print(f"{ilya} Тебя зовут {col.b}{col.bd}Илья [🛠️]?{col.w}")
+        print(f"{ilya} Тебя зовут {col.b}{stl.bd}Илья [🛠️]?{col.w}")
         time.sleep(3)
         print(f"{ilya} Это либо совпадение, либо..{col.w}")
         time.sleep(2)
-        print(f'{ilya} ..либо ты являешься {col.b}{col.bd}создателем{col.w}. ')
+        print(f'{ilya} ..либо ты являешься {col.b}{stl.bd}создателем{col.w}. ')
         time.sleep(2)
-        print(f"И да меня зовут {col.b}{col.bd}Илья [🛠️]{col.w} и я это все пишу в VSCodium(вскод но на линуксе, да я на арче :Р).")
+        print(f"И да меня зовут {col.b}{stl.bd}Илья [🛠️]{col.w} и я это все пишу в VSCodium(вскод но на линуксе, да я на арче :Р).")
         print('Я думаю что это можно считать за пасхалку!')
         time.sleep(4)
         print('Молодец что нашёл!!')
         time.sleep(2)
     else:
-        print(f"{ilya} Тебя зовут {col.y}{col.bd}{USER}.")
+        print(f"{ilya} Тебя зовут {col.y}{stl.bd}{USER}.")
 
 def guess():
     guess_num = random.randint(1, 10000)
@@ -176,11 +179,11 @@ def guess():
             guess_out = int(input(f'{prompt}{col.v} [GUESS]{col.w} > '))
             ходы += 1
             if guess_out > guess_num:
-                print(f'{ilya} {col.rbd}Число меньше!{col.w}')
+                print(f'{ilya} {col.r}{stl.bd}Число меньше!{col.w}')
             elif guess_out < guess_num:
-                print(f'{ilya} {col.g}{col.bd}Число больше!{col.w}')
+                print(f'{ilya} {col.g}{stl.bd}Число больше!{col.w}')
             elif guess_out == guess_num:
-                print(f'{ilya} {col.y}{col.bd}Победа!!{col.w} Ходы: {ходы}.')
+                print(f'{ilya} {col.y}{stl.bd}Победа!!{col.w} Ходы: {ходы}.')
                 break
         except ValueError:
             print(f'{ilya} {USER}, вводи числа!')
@@ -199,9 +202,9 @@ def rng(arg):
     try:
         min_val = int(arg[0])
         max_val = int(arg[1])
-        result = random.randint(min_val, max_val)
+        rsult = random.randint(min_val, max_val)
         phrases = ['Твое рандомное число: ', 'тебе выпало: ', 'лох :)))) ', 'Your RNG number: ']
-        print(f'{ilya}{random.choice(phrases)}{result}')
+        print(f'{ilya}{random.choice(phrases)}{rsult}')
     except ValueError:
         print(f"{ilya} Вводи только числа! Минимальное число не может быть больше максимального!!")
     except IndexError:
@@ -209,9 +212,9 @@ def rng(arg):
 def fdead_list():
     global dead_list
     if dead_list:
-        print(f"{col.rbd}Илья: Убитые: {', '.join(dead_list)}{col.w}")
+        print(f"{col.r}{stl.bd}Илья: Убитые: {', '.join(dead_list)}{col.w}")
     else:
-        print(f"{col.g}{col.bd}Илья: Все живы.{col.w}")
+        print(f"{col.g}{stl.bd}Илья: Все живы.{col.w}")
 def binary_code(arg):
     try:
         flag = arg[0]
@@ -235,17 +238,17 @@ def binary_code(arg):
         print(f'{ilya} error')
 def sudo(arg='Null'):
     if arg == 'Null' or not arg:
-        sudoin = input(f'{prompt} {col.rbd}[sudo]{col.rs} > {col.c}')
+        sudoin = input(f'{prompt} {col.r}{stl.bd}[sudo]{rs.all} > {col.c}')
     else:
         sudoin = ' '.join(arg)
-    sudo_confirm = input(f'{ilya} Перед тем как ты продолжишь:\nКоманда sudo - это буквально получение {col.bd}всех{col.rs} прав над компьютером, одна неверная команда может {col.rbd}удалить или сломать систему.{col.rs}\nПродолжая ты принимаешь всю ответственность за принесённый ущерб системе и/или другим пользователям на себя.\nСоветую подумать дважды, ведь в ином случаи без сохранения ты не вернешь того что потерял.\nЭто первое и последнее предупреждение. [Yes|>No<] ')
+    sudo_confirm = input(f'{ilya} Перед тем как ты продолжишь:\nКоманда sudo - это буквально получение {stl.bd + stl.underl}всех{rs.stl} прав над компьютером, одна неверная команда может {col.r}{stl.bd}удалить или сломать систему.{col.rs}\nПродолжая ты принимаешь всю ответственность за принесённый ущерб системе и/или другим пользователям на себя.\nСоветую подумать дважды, ведь в ином случаи без сохранения ты не вернешь того что потерял.\nЭто первое и последнее предупреждение. [{bg.g}Yes{rs.bg}|{bg.r}No{rs.bg}] {bg.w}')
     if sudo_confirm == 'Yes':
         os.system(f'sudo {sudoin}')
 ### -- Словарики команд --
 COMMANDSWARGS = {
     'kill':kill,
     'revive':revive,
-    'respawn':revive,
+    'rspawn':revive,
     'rebirth':revive,
     'echo':echo,
     'rng':rng,
@@ -272,12 +275,12 @@ def StartShell():
     global INTERACTIVE
     INTERACTIVE = True
     # приветствие при запуске StartShell()
-    print(f'{col.bd}Добро пожаловать в оболочку {col.g}{col.bd}💚 Ilya\'s{col.c}:Shell 🐚,{col.w}')
-    print(f'улучшенную версию {col.g}{col.bd}ilya\'s{col.v}:{col.c}cmd_{col.w} написаную на {col.y}Python 3.1!{col.rs}')
+    print(f'{stl.bd}Добро пожаловать в оболочку {col.g}{stl.bd}💚 Ilya\'s{col.c}:Shell 🐚,{col.w}')
+    print(f'улучшенную версию {col.g}{stl.bd}ilya\'s{col.v}:{col.c}cmd_{col.w} написаную на {col.y}Python 3.1!{col.rs}')
     if configShell.USER_COMMANDS.enabled == True:
         COMMANDS.update(configShell.USER_COMMANDS.list_ )
         COMMANDSWARGS.update(configShell.USER_COMMANDS.list_with_args)
-        print(f'{col.bd}{col.g}Включенны пользовательские команды.{col.rs}')
+        print(f'{stl.bd}{col.g}Включенны пользовательские команды.{col.rs}')
     while True:
         try:
             inp = input(f'{prompt} > ').split()
@@ -285,13 +288,13 @@ def StartShell():
             arg = inp[1:]
         except KeyboardInterrupt:
             INTERACTIVE = False
-            # raise SystemExit(f'\n{col.rbd}Илья: ЗА ЧТО ?!??!?!?!??!?!??!?787:?%?*(?№"*(?(;"291Н87УНЦ378АНУК7П')
-            print(f'{col.rbd}Илья: ЗА ЧТО ?!??!?!?!??!?!??!?787:?%?*(?№"*(?(;"291Н87УНЦ378АНУК7П')
+            # raise SystemExit(f'\n{col.r}{stl.bd}Илья: ЗА ЧТО ?!??!?!?!??!?!??!?787:?%?*(?№"*(?(;"291Н87УНЦ378АНУК7П')
+            print(f'{col.r}{stl.bd}Илья: ЗА ЧТО ?!??!?!?!??!?!??!?787:?%?*(?№"*(?(;"291Н87УНЦ378АНУК7П')
             break
         except EOFError:
             INTERACTIVE = False
-            # raise SystemExit(f'\n{col.rbd}Илья: ЗА ЧТО ?!??!?!?!??!?!??!?787:?%?*(?№"*(?(;"291Н87УНЦ378АНУК7П')
-            print(f'{col.rbd}Илья: ЗА ЧТО ?!??!?!?!??!?!??!?787:?%?*(?№"*(?(;"291Н87УНЦ378АНУК7П')
+            # raise SystemExit(f'\n{col.r}{stl.bd}Илья: ЗА ЧТО ?!??!?!?!??!?!??!?787:?%?*(?№"*(?(;"291Н87УНЦ378АНУК7П')
+            print(f'{col.r}{stl.bd}Илья: ЗА ЧТО ?!??!?!?!??!?!??!?787:?%?*(?№"*(?(;"291Н87УНЦ378АНУК7П')
             break
         except IndexError:
             continue
@@ -303,20 +306,20 @@ def StartShell():
                 COMMANDS[cmd]()
             elif cmd in ['exit', 'break', 'quit']:
                 INTERACTIVE = False
-                # raise SystemExit(f'{col.rbd}Илья: ЗА ЧТО ?!??!?!?!??!?!??!?787:?%?*(?№"*(?(;"291Н87УНЦ378АНУК7П')
-                print(f'{col.rbd}Илья: ЗА ЧТО ?!??!?!?!??!?!??!?787:?%?*(?№"*(?(;"291Н87УНЦ378АНУК7П')
+                # raise SystemExit(f'{col.r}{stl.bd}Илья: ЗА ЧТО ?!??!?!?!??!?!??!?787:?%?*(?№"*(?(;"291Н87УНЦ378АНУК7П')
+                print(f'{col.r}{stl.bd}Илья: ЗА ЧТО ?!??!?!?!??!?!??!?787:?%?*(?№"*(?(;"291Н87УНЦ378АНУК7П')
                 break
             else:
                 print(configShell.COMMAND_NOT_FOUND)
         except Exception as e:
             EType = type(e).__name__
-            print(f'{col.y}{col.bd}{random.choice([
+            print(f'{col.y}{stl.bd}{random.choice([
                 f'Опа! Ошибка...',
                 f'Чё? Опять?',
                 f'Ломай! Ломай! Мы же миллионеры!',
                 f'о нет ошыбка'
             ])}{col.rs}')
-            print(f'{col.bd}{col.v if EType != "KillAttemptError" else col.r}{EType}{col.rs}: {e}{col.rs}')
+            print(f'{stl.bd}{col.v if EType != "KillAttemptError" else col.r}{EType}{col.rs}: {e}{col.rs}')
 # -- Запуск --
 if __name__ == '__main__': # Если файл запущен напрямую, то запускается StartShell() и оболочка начинает работать
     StartShell()
