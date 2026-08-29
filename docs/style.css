@@ -1,0 +1,110 @@
+@font-face {
+    font-family: 'JetBrains Mono';
+    src: url(./fonts/JetBrainsMono-Regular-Var.ttf);
+    font-style: normal;
+    font-weight: 100 900;
+}
+@font-face {
+    font-family: 'JetBrains Mono';
+    src: url(./fonts/JetBrainsMono-Italic-Var.ttf);
+    font-style: italic;
+    font-weight: 100 900;
+}
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    color: #fff;
+    font-family: JetBrains Mono, system-ui, sans-serif;
+}
+html{
+    width: 100%;
+    min-height: 100%;
+    background-color: #111;
+}
+#top-ilyasshell #gradient-g-to-gb{
+    background: linear-gradient(90deg, #0d0, #0ff);
+    color: transparent;
+    background-clip: text;
+}
+#top-ilyasshell{
+    font-size: 48px;
+    text-align: center;
+}
+body{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    font-size: 18px;
+}
+.container{
+    display: flex;
+    flex-direction: column;
+    background: #222;
+    min-height: 50vh;
+    min-width: 50vw;
+    padding: 30px 40px;
+    border: 1px solid #333;
+    border-radius: 20px;
+    box-shadow: 10px 10px 10px #000;
+}
+#some-sort-of-quote{
+    border-left: 3px solid #fff;
+    padding: 5px 15px;
+    border-radius: 5px;
+    background: #0000003e;
+}
+#gradient-hr{
+    height: 4px;
+    background: linear-gradient(90deg, transparent, #0d0, #0ff, transparent);
+    width: 100%;
+    margin: 10px 0;
+    border-radius: 2px;
+}
+.button-like-a{
+    display: inline-block;
+    text-decoration: none;
+}
+button, .button-like-a{
+    background: #282828;
+    border: 1px solid #444;
+    padding: 10px 20px;
+    font-size: 16px;
+    border-radius: 20px;
+    margin: 10px 5px;
+    box-shadow: 5px 5px 2px #111;
+    transition: all 0.08s ease;
+    cursor: pointer;
+}
+button:hover, .button-like-a:hover{
+    background: #4c4c4c;
+}
+button:active, .button-like-a:active{
+    background: #1f1f1f;
+    transform: translate(5px,5px);
+    box-shadow: 0 0 0 #000;
+}
+.github-repo{
+    background: #070;
+    border-color: #0c0;
+    color:#fff;
+    
+}
+.github-repo:hover{
+    background: #0a0;
+}
+.github-repo:active{
+    background: #030;
+    border-color: #060;
+}
+footer{
+    margin-top: auto;
+
+}
+.footer-hr{
+    height: 3px;
+    background: #444;
+    margin: 10px 0;
+}
+
