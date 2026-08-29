@@ -199,7 +199,7 @@ chmod +x IlyasShell.py
 
 ## 🔗 Ссылки
 
-[GitHub репозиторий](https://github.com/IMAMCHA1N1K/Ilyas-Shell)
+[GitHub репозиторий](https://github.com/0x1lyab/Ilyas-Shell)
 
 ---
 
