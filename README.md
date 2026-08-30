@@ -1,3 +1,5 @@
+# ПРОСТИТЕ ЧТО Я ДВА РАЗА НИКНЕЙМ ПОМЕНЯЛ
+
 # 💚 Ilya's:Shell 🐚
 
 **Модульная оболочка для терминала, написанная на Python 3.1**
@@ -23,7 +25,7 @@
   - `sudo` - ты должен это знать.
 
 - **Сайт про Ilya's:Shell**
-  [Ссылка на сайт](https://0x1lyab.guthub.io/Ilyas-Shell)
+  [Ссылка на сайт](https://ilya-bushmelev.guthub.io/Ilyas-Shell)
 
 - **Пользовательские команды**:  
   Добавь свои функции в `configShell.py` — и они появятся в оболочке. 
@@ -42,7 +44,7 @@
 
 ## 📦 Установка
 ### Arch
-- Перейди в [последний релиз](https://github.com/IMAMCHA1N1K/Ilyas-Shell/releases/latest).
+- Перейди в [последний релиз](https://github.com/ilya-bushmelev/Ilyas-Shell/releases/latest).
 - Установи пакет .tar.zst
 - Установи
 ```bash
@@ -56,7 +58,7 @@ ilyascmd # для ilya's:cmd_
 ### Другие дистрибутивы / ОС
 #### 1. Клонируй репозиторий
 ```bash
-git clone https://github.com/IMAMCHA1N1K/Ilyas-Shell.git
+git clone https://github.com/ilya-bushmelev/Ilyas-Shell.git
 cd Ilyas-Shell
 ```
 #### 2. Запусти оболочку
@@ -202,7 +204,7 @@ chmod +x IlyasShell.py
 
 ## 🔗 Ссылки
 
-[GitHub репозиторий](https://github.com/0x1lyab/Ilyas-Shell)
+[GitHub репозиторий](https://github.com/ilya-bushmelev/Ilyas-Shell)
 
 ---
 

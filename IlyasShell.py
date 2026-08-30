@@ -31,7 +31,7 @@ except ModuleNotFoundError:
 __version__ = 'v1.1.1'
 col = configShell.col
 bg = configShell.bg
-stl = configShel.stl
+stl = configShell.stl
 rs = configShell.rs
 USER = os.getlogin()
 prompt = configShell.PROMPT
@@ -62,7 +62,7 @@ def shelp(): # к сожалению help() нельзя использоват�
             'calc/calculator                    - запуск скрипта calc1.py (через вызов функции, напрямую невозможно)\n',
             'rng/random/randomizer <min> <max>  - вывести рандомное число в заданом диапазоне\n',
             'pif/pifagor                        - запуск скрипта pifagor.py (через вызов функции, напрямую невозможно)\n',
-            'guess                              - игра в угадай число\n',
+            'guess <максимальное число>         - игра в угадай число\n',
             'echo <текст>                       - вывести текст\n',
            f'sudo <команда>                     - запускает команды от админа {col.r}{stl.bd}(ОПАСНО!){rs.all}'
         )
@@ -77,7 +77,7 @@ def shelp(): # к сожалению help() нельзя использоват�
             "calcdotpy()                - запуск скрипта calc1.py, импортировать перед запуском\n",
             "rng([<min>, <max>])        - вывести рандомное число в заданном диапазоне\n",
             "pifagorpy()                - запуск скрипта pifagor.py, импортировать перед запуском\n",
-            "guess()                    - игра в угадай число\n",
+            "guess([<макс. число>])     - игра в угадай число\n",
             "echo(['<текст>'])          - вывести текст, конкретно здесь это бесполезно, используйте лучше print()"
         )
 
@@ -101,7 +101,8 @@ def kill(target='Null'):
             'не убивай меня',
             'зачем меня убивать?',
             'проверь шкаф',
-            'бибизяка! 🐦 (это моя оболочка, я имею право писать всё что угодно)'
+            'бибизяка! 🐦 (это моя оболочка, я имею право писать всё что угодно)',
+            'НЕ УБИВАЙ ПОЖАЖА'
         ])}{col.w}") #! передаю привет дипсику
     elif target_ls not in dead_list:
         confirm = input(f'{ilya}Ты уверен? [y/N] ').lower().strip()
@@ -167,12 +168,16 @@ def whoami():
     else:
         print(f"{ilya} Тебя зовут {col.y}{stl.bd}{USER}.")
 
-def guess():
-    guess_num = random.randint(1, 10000)
+def guess(arg='Null'):
+    if arg == 'Null' or not arg:
+        max_num = input(f'{ilya} Перед началом, напиши число лимита')
+    else:
+        max_num = arg[0]
+    guess_num = random.randint(1, max_num)
     guess_out = 0
     print(f'{ilya} Правила: Я загадываю число, а ты отгадываешь.',
         f'\nЧтобы отгадать число тебе нужно будет писать число, а я говорю больше оно или меньше.',
-        f'\nИ так до тех пор пока ты не отгадаешь число. Для старта напиши любое число. (Число от 1 до 10тыс.)')
+        f'\nИ так до тех пор пока ты не отгадаешь число. Для старта напиши любое число. ')
     ходы = 0
     while True:
         try:
@@ -241,7 +246,7 @@ def sudo(arg='Null'):
         sudoin = input(f'{prompt} {col.r}{stl.bd}[sudo]{rs.all} > {col.c}')
     else:
         sudoin = ' '.join(arg)
-    sudo_confirm = input(f'{ilya} Перед тем как ты продолжишь:\nКоманда sudo - это буквально получение {stl.bd + stl.underl}всех{rs.stl} прав над компьютером, одна неверная команда может {col.r}{stl.bd}удалить или сломать систему.{col.rs}\nПродолжая ты принимаешь всю ответственность за принесённый ущерб системе и/или другим пользователям на себя.\nСоветую подумать дважды, ведь в ином случаи без сохранения ты не вернешь того что потерял.\nЭто первое и последнее предупреждение. [{bg.g}Yes{rs.bg}|{bg.r}No{rs.bg}] {bg.w}')
+    sudo_confirm = input(f'{ilya} Перед тем как ты продолжишь:\nКоманда sudo - это буквально получение {stl.bd + col.r}всех{rs.all} прав над компьютером, одна неверная команда может {col.r}{stl.bd}удалить или сломать систему.{rs.all}\nПродолжая {bg.y + col.black}ты принимаешь{rs.bg} всю ответственность за принесённый ущерб системе и/или другим пользователям {col.r}{stl.bd}на себя{rs.all}.\nСоветую подумать дважды, ведь в ином случаи без сохранения ты {col.r}{stl.bd}не{rs.all} вернешь того что потерял.\nЭто первое и последнее предупреждение. [{bg.g + col.black}Yes{rs.all}|{bg.r + col.black}No{rs.all}] {col.c + stl.bd}')
     if sudo_confirm == 'Yes':
         os.system(f'sudo {sudoin}')
 ### -- Словарики команд --
@@ -255,6 +260,7 @@ COMMANDSWARGS = {
     'random':rng,
     'randomizer':rng,
     'binary':binary_code,
+    'guess':guess,
     'sudo':sudo
 }
 COMMANDS = {
@@ -266,7 +272,6 @@ COMMANDS = {
     'calculator':calc1.calcdotpy,
     'pif':pifagor.pifagorpy,
     'pifagor':pifagor.pifagorpy,
-    'guess':guess,
     'dead_list':fdead_list
 }
 
@@ -276,11 +281,11 @@ def StartShell():
     INTERACTIVE = True
     # приветствие при запуске StartShell()
     print(f'{stl.bd}Добро пожаловать в оболочку {col.g}{stl.bd}💚 Ilya\'s{col.c}:Shell 🐚,{col.w}')
-    print(f'улучшенную версию {col.g}{stl.bd}ilya\'s{col.v}:{col.c}cmd_{col.w} написаную на {col.y}Python 3.1!{col.rs}')
+    print(f'улучшенную версию {col.g}{stl.bd}ilya\'s{col.v}:{col.c}cmd_{col.w} написаную на {col.y}Python 3.1!{rs.all}')
     if configShell.USER_COMMANDS.enabled == True:
         COMMANDS.update(configShell.USER_COMMANDS.list_ )
         COMMANDSWARGS.update(configShell.USER_COMMANDS.list_with_args)
-        print(f'{stl.bd}{col.g}Включенны пользовательские команды.{col.rs}')
+        print(f'{stl.bd}{col.g}Включенны пользовательские команды.{rs.all}')
     while True:
         try:
             inp = input(f'{prompt} > ').split()
@@ -317,9 +322,14 @@ def StartShell():
                 f'Опа! Ошибка...',
                 f'Чё? Опять?',
                 f'Ломай! Ломай! Мы же миллионеры!',
-                f'о нет ошыбка'
-            ])}{col.rs}')
-            print(f'{stl.bd}{col.v if EType != "KillAttemptError" else col.r}{EType}{col.rs}: {e}{col.rs}')
+                f'о нет ошыбка',
+                f'404 Error: Message Not Found',
+                f'програмисты перед сном вместо овец считают ошибки',
+                f'-1 нервная клетка',
+                f'Удачи разобраться',
+                f'(илья снова не придумал сообщение)'
+            ])}{rs.all}')
+            print(f'{stl.bd}{col.v if EType != "KillAttemptError" else col.r}{EType}{rs.all}: {e}{rs.all}')
 # -- Запуск --
 if __name__ == '__main__': # Если файл запущен напрямую, то запускается StartShell() и оболочка начинает работать
     StartShell()
