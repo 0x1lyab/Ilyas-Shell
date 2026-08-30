@@ -28,7 +28,7 @@ except ModuleNotFoundError:
     pass
 
 ### -- Переменные --
-__version__ = 'v1.1.1'
+__version__ = 'v1.2'
 col = configShell.col
 bg = configShell.bg
 stl = configShell.stl
@@ -170,9 +170,9 @@ def whoami():
 
 def guess(arg='Null'):
     if arg == 'Null' or not arg:
-        max_num = input(f'{ilya} Перед началом, напиши число лимита')
+        max_num = int(input(f'{ilya} Перед началом, напиши число лимита: '))
     else:
-        max_num = arg[0]
+        max_num = int(arg[0])
     guess_num = random.randint(1, max_num)
     guess_out = 0
     print(f'{ilya} Правила: Я загадываю число, а ты отгадываешь.',
@@ -246,7 +246,7 @@ def sudo(arg='Null'):
         sudoin = input(f'{prompt} {col.r}{stl.bd}[sudo]{rs.all} > {col.c}')
     else:
         sudoin = ' '.join(arg)
-    sudo_confirm = input(f'{ilya} Перед тем как ты продолжишь:\nКоманда sudo - это буквально получение {stl.bd + col.r}всех{rs.all} прав над компьютером, одна неверная команда может {col.r}{stl.bd}удалить или сломать систему.{rs.all}\nПродолжая {bg.y + col.black}ты принимаешь{rs.bg} всю ответственность за принесённый ущерб системе и/или другим пользователям {col.r}{stl.bd}на себя{rs.all}.\nСоветую подумать дважды, ведь в ином случаи без сохранения ты {col.r}{stl.bd}не{rs.all} вернешь того что потерял.\nЭто первое и последнее предупреждение. [{bg.g + col.black}Yes{rs.all}|{bg.r + col.black}No{rs.all}] {col.c + stl.bd}')
+    sudo_confirm = input(f'{ilya} Перед тем как ты продолжишь:\nКоманда sudo - это буквально получение {stl.bd + col.r}всех{rs.all} прав над компьютером, одна неверная команда может {col.r}{stl.bd}удалить или сломать систему.{rs.all}\nПродолжая {bg.y + col.black}ты принимаешь{rs.all} всю ответственность за принесённый ущерб системе и/или другим пользователям {col.r}{stl.bd}на себя{rs.all}.\nСоветую подумать дважды, ведь в ином случаи без сохранения ты {col.r}{stl.bd}не{rs.all} вернешь того что потерял.\nЭто первое и последнее предупреждение. [{bg.g + col.black}Yes{rs.all}|{bg.r + col.black}No{rs.all}] {col.c + stl.bd}')
     if sudo_confirm == 'Yes':
         os.system(f'sudo {sudoin}')
 ### -- Словарики команд --
@@ -272,7 +272,8 @@ COMMANDS = {
     'calculator':calc1.calcdotpy,
     'pif':pifagor.pifagorpy,
     'pifagor':pifagor.pifagorpy,
-    'dead_list':fdead_list
+    'dead_list':fdead_list,
+    'version':version
 }
 
 #  -- Основной цикл --
