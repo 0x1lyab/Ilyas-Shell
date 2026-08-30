@@ -130,8 +130,14 @@ footer{
         display:none;
     }
 } @media (max-width:500px) {
+    body{
+        font-size: 16px;
+    }
     #top-ilyasshell{
-        font-size: 40px;
+        font-size: 10vw;
+    }
+    .container{
+        padding: 5vw;
     }
     li{
         margin-left: 30px;
