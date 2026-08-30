@@ -6,8 +6,8 @@ ilya.addEventListener('dblclick', function() {
         this.textContent = originalText
     }, 2000)
 })
-const z0x1lyab = document.getElementById('0x1lyab')
-z0x1lyab.addEventListener('dblclick', function() {
+const ilya_bushmelev = document.getElementById('ilya-bushmelev')
+ilya_bushmelev.addEventListener('dblclick', function() {
     let originalText = this.textContent
     this.textContent = "Мой ник на GitHub!"
     setTimeout(() => {
