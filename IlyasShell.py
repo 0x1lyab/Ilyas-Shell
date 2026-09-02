@@ -64,7 +64,7 @@ def shelp(): # к сожалению help() нельзя использоват�
             'pif/pifagor                        - запуск скрипта pifagor.py (через вызов функции, напрямую невозможно)\n',
             'guess <максимальное число>         - игра в угадай число\n',
             'echo <текст>                       - вывести текст\n',
-           f'sudo <команда>                     - запускает команды от админа {col.r}{stl.bd}(ОПАСНО!){rs.all}'
+           f'{stl.dim + stl.italic}sudo <команда>                     - запускает команды от админа {col.r}{stl.bd}(УДАЛЕНО!){rs.all}'
         )
     elif INTERACTIVE == False:
         print(f"{ilya} Вот тебе список:\n",
@@ -241,14 +241,6 @@ def binary_code(arg):
         print(f'{ilya} error')
     except IndexError:
         print(f'{ilya} error')
-def sudo(arg='Null'):
-    if arg == 'Null' or not arg:
-        sudoin = input(f'{prompt} {col.r}{stl.bd}[sudo]{rs.all} > {col.c}')
-    else:
-        sudoin = ' '.join(arg)
-    sudo_confirm = input(f'{ilya} Перед тем как ты продолжишь:\nКоманда sudo - это буквально получение {stl.bd + col.r}всех{rs.all} прав над компьютером, одна неверная команда может {col.r}{stl.bd}удалить или сломать систему.{rs.all}\nПродолжая {bg.y + col.black}ты принимаешь{rs.all} всю ответственность за принесённый ущерб системе и/или другим пользователям {col.r}{stl.bd}на себя{rs.all}.\nСоветую подумать дважды, ведь в ином случаи без сохранения ты {col.r}{stl.bd}не{rs.all} вернешь того что потерял.\nЭто первое и последнее предупреждение. [{bg.g + col.black}Yes{rs.all}|{bg.r + col.black}No{rs.all}] {col.c + stl.bd}')
-    if sudo_confirm == 'Yes':
-        os.system(f'sudo {sudoin}')
 ### -- Словарики команд --
 COMMANDSWARGS = {
     'kill':kill,
@@ -260,8 +252,7 @@ COMMANDSWARGS = {
     'random':rng,
     'randomizer':rng,
     'binary':binary_code,
-    'guess':guess,
-    'sudo':sudo
+    'guess':guess
 }
 COMMANDS = {
     'help':shelp,
