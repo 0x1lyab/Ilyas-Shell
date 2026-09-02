@@ -273,7 +273,7 @@ def StartShell():
     INTERACTIVE = True
     # приветствие при запуске StartShell()
     print(f'{stl.bd}Добро пожаловать в оболочку {col.g}{stl.bd}💚 Ilya\'s{col.c}:Shell 🐚,{col.w}')
-    print(f'улучшенную версию {col.g}{stl.bd}ilya\'s{col.v}:{col.c}cmd_{col.w} написаную на {col.y}Python 3.1!{rs.all}')
+    print(f'улучшенную версию {col.g}{stl.bd}ilya\'s{col.v}:{col.c}cmd_{col.w} написаную на {col.y}Python 3.14!{rs.all}')
     if configShell.USER_COMMANDS.enabled == True:
         COMMANDS.update(configShell.USER_COMMANDS.list_ )
         COMMANDSWARGS.update(configShell.USER_COMMANDS.list_with_args)
