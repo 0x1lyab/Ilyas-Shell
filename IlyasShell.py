@@ -33,11 +33,14 @@ col = configShell.col
 bg = configShell.bg
 stl = configShell.stl
 rs = configShell.rs
-USER = os.getlogin()
 prompt = configShell.PROMPT
 dead_list = configShell.DEAD_LIST
-ilya = f'{col.g}{stl.bd}Илья:{rs.all}'
 dont_dare = configShell.KILL_BLACK_LIST
+
+USER = os.getlogin()
+
+ilya = f'{col.g}{stl.bd}Илья:{rs.all}'
+
 dont_dare.extend(['чижик', 'chizhik', 'илья', 'ilya', "пыжуля", 'pyzhulya' "чыжык", USER])
 history_file = os.path.expanduser('~/.history_file')
 try:
@@ -57,14 +60,13 @@ def shelp(): # к сожалению help() нельзя использоват�
             'dead_list                          - список мёртвых\n',
             'help                               - показать это меню\n',
             'whoami                             - показать юзернейм\n',
-            'version                            - показать версию оболочки'
+            'version                            - показать версию оболочки',
             'exit/quit/break                    - выйти из оболочки ;(\n',
             'calc/calculator                    - запуск скрипта calc1.py (через вызов функции, напрямую невозможно)\n',
             'rng/random/randomizer <min> <max>  - вывести рандомное число в заданом диапазоне\n',
             'pif/pifagor                        - запуск скрипта pifagor.py (через вызов функции, напрямую невозможно)\n',
             'guess <максимальное число>         - игра в угадай число\n',
             'echo <текст>                       - вывести текст\n',
-           f'{stl.dim + stl.italic}sudo <команда>                     - запускает команды от админа {col.r}{stl.bd}(УДАЛЕНО!){rs.all}'
         )
     elif INTERACTIVE == False:
         print(f"{ilya} Вот тебе список:\n",
